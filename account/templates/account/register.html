@@ -1,0 +1,70 @@
+<!-- Extends base file -->
+{% extends 'account/base.html' %}
+
+<!-- load static file -->
+{% load static %}
+
+<!-- Title -->
+{% block title %}register{% endblock title %}
+
+<!-- CSS -->
+{% block style %}
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+{% endblock style %}
+
+<!-- Body content -->
+{% block content %}
+	<div class="container">
+<!-- Alert messages start -->
+		{% for msg in messages %}
+	    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+	      <p class="text-center mb-3"><strong>Hey !</strong> {{msg}}</p>
+	      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	  {% endfor %}
+<!-- Alert messages end -->
+
+<!-- Register block start -->
+		<div class="row" style="margin-top: 50px;">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+				<div class="jumbotron jumbotron-fluid">
+					<div class="container">
+						<h1 class="text-center mb-3">Register</h1>
+						<div class="">
+							<form method="POST" class="form">
+								{% csrf_token %}
+
+								<label>{{form.email.label}}</label>
+								{{ form.email }}
+
+								<label>{{form.first_name.label}}</label>
+								{{ form.first_name }}
+
+								<label>{{form.last_name.label}}</label>
+								{{ form.last_name }}
+
+								<label>{{form.password1.label}}</label>
+								{{ form.password1 }}
+
+								<label>{{form.password2.label}}</label>
+								{{ form.password2 }}
+
+								<input class="btn btn-block btn-primary" type="submit" value="Register">
+							</form>
+						</div>
+						<div class="mt-3">
+							<h4 class="text-center text-warning">Already have an account?</h4>
+							<p></p>
+							<a class="btn btn-block btn-warning" href="{% url 'account:login' %}">Login</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+<!-- Register block end -->
+	</div>
+{% endblock content %}

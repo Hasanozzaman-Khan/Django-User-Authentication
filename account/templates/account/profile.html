@@ -1,0 +1,42 @@
+<!-- Extends base file -->
+{% extends 'account/base.html' %}
+
+<!-- load static file -->
+{% load static %}
+
+<!-- Title -->
+{% block title %}Profile{% endblock title %}
+
+<!-- CSS -->
+{% block style %}
+	<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+{% endblock style %}
+
+<!-- Body content -->
+{% block content %}
+	<div class="container">
+<!-- Alert messages start -->
+		{% for msg in messages %}
+	    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+	      <p class="text-center mb-3"><strong>Hey !</strong> {{msg}}</p>
+	      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+	      </button>
+	    </div>
+	  {% endfor %}
+<!-- Alert messages end -->
+<!-- Profile start -->
+    <div class="content-section">
+      <div class="media">
+				<img src="{{user.profilemodel.image.url}}" alt="" class="rounded-circle account-img">
+        <div class="media-body">
+          <h2 class="account-heading text-center">{{ user.get_full_name }}</h2>
+          <p class="text-secondary text-center">{{ user.email }}</p>
+        </div>
+      </div>
+			<a class="btn btn-block btn-primary" href="{% url 'account:profile_update' %}">Update Info</a>
+			<a class="btn btn-block btn-warning" href="{% url 'account:password_change' %}">Change Password</a>
+    </div>
+<!-- Profile end -->
+	</div>
+{% endblock content %}
